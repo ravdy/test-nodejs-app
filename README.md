@@ -44,23 +44,3 @@ Using simple "hello world" application from the [nodejs.org](https://nodejs.org/
    ```
 
 ## To Deploy on nodejs application server 
-
-1. Download `publish over ssh` plugin and configure nodejs server 
-   ```sh
-   Manage Jenkins --> Manage Plugins --> Available --> Search for "publish Over SSH" and install
-
-   Manage Jenkins --> configure System --> Publish over SSH
-   `key` - Private key (.pem key which is used to login nodejs server)
-   SSH Server 
-        Name - nodejs server 
-        HostName - <nodejs server Private IP> (you can still use public IP too. But it get changed every time when you stop and start of the server)
-        Username - ec2-user 
-        Remote Directory - /tmp (make sure you have access to `Remote Directory`. /tmp is accessable by any user by default)
-        Click Save and Apply
-   ```
-  
-
-1. Update the jenkins job to deploy on nodejs server 
-
-   ```sh 
-   Post build actions 
