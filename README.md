@@ -20,7 +20,6 @@
    yum -y install nodejs
    ```
 
-
 Setup Jenkins job 
 
 
