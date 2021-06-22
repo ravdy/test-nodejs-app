@@ -10,7 +10,7 @@ pipeline {
            sh 'npm install' 
         }
      }
-     
+     testtt
      stage('Test') { 
         steps { 
            sh 'echo "testing application..."'
