@@ -6,7 +6,7 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-          echo "testing application..."
+          echo "build application..."
         }
      }
      
@@ -18,7 +18,7 @@ pipeline {
 
          stage("Deploy nodejs application") { 
          steps { 
-           echo "testing application..."
+           echo "deploy application..."
          }
 
      }
