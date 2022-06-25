@@ -6,7 +6,7 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'dnf install npm' 
+           sh 'yum install nginx' 
         }
      }
      
