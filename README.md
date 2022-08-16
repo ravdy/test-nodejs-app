@@ -28,7 +28,6 @@ Github URL: https://github.com/ravdy/nodejs.git
 
 Using simple "hello world" application from the [nodejs.org](https://nodejs.org/en/docs/guides/getting-started-guide/) website
 
-
 ## On Jenkins GUI 
 
 1. Create the new FreeStyle Project 
