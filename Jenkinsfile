@@ -1,8 +1,7 @@
 pipeline { 
+  agent any
   
-   agent any
-
-   stages {
+  stages {
    
      stage('Install Dependencies') { 
         steps { 
@@ -10,7 +9,13 @@ pipeline {
         }
      }
      
-     stage('Test') { 
+     stage('Test') {
+       when {
+         beforeAgent true
+         anyof {
+           branch 'develop'; branch 'prod'
+              }
+       }
         steps { 
            sh 'echo "testing application..."'
         }
