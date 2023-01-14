@@ -16,7 +16,7 @@ pipeline {
         }
       }
 
-         stage("Deploy application") { 
+         stage("Deploy application ASAP") { 
          steps { 
            sh 'echo "deploying application..."'
          }
