@@ -7,6 +7,7 @@
 
 ### Setup nodejs packages on jenkins (needed for build) and application server (needed to deploy)
 1. Enable nodejs packages on Linux server 
+      echo is used only for this 
    ```sh 
    curl -sL https://rpm.nodesource.com/setup_15.x | bash -
    ```
