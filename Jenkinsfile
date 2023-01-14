@@ -6,7 +6,7 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'sudo git --version' 
+           echo "sudo vaibhav patlll" 
         }
      }
      
