@@ -6,7 +6,9 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
+
            echo "sudo vaibhav patlll" 
+
         }
      }
      
