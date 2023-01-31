@@ -6,7 +6,9 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'npm install' 
+
+           echo "sudo vaibhav patlll" 
+
         }
      }
      
@@ -16,7 +18,7 @@ pipeline {
         }
       }
 
-         stage("Deploy application") { 
+         stage("Deploy application ASAP") { 
          steps { 
            sh 'echo "deploying application..."'
          }
