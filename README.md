@@ -24,7 +24,7 @@ Setup Jenkins job
 
 ## Fork nodejs applicaton onto your repository 
 
-Github URL: https://github.com/ravdy/nodejs.git
+Github URL: https://github.com/rhv63/test-nodejs-app.git
 
 Using simple "hello world" application from the [nodejs.org](https://nodejs.org/en/docs/guides/getting-started-guide/) website
 
