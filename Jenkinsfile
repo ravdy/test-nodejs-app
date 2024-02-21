@@ -20,7 +20,7 @@ pipeline {
             }
         }
      
-     // stage('Git Clone') {
+     // stage('Git Clone') { 
      //        steps {
      //            // Git clone step
      //            script{
