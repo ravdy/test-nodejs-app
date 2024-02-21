@@ -9,6 +9,7 @@ pipeline {
            sh 'echo "install Dependencies"'
            script{
              echo "Current branch: ${env.BRANCH_NAME}"
+             echo "Git repo: ${env.GIT_URL}"
            }
         }
      }
