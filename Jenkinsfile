@@ -17,7 +17,9 @@ pipeline {
             steps {
                 // Git clone step
                 script{
-                  git branch: "${env.BRANCH_NAME}", credentialsId: 'git-hub', URL: "${env.GIT_URL}"
+                  // git branch: "${env.BRANCH_NAME}", credentialsId: 'git-hub', URL: "${env.GIT_URL}"
+                  git branch: 'dev', credentialsId: 'git-hub', url: 'https://github.com/ashirwad8858/test-nodejs-app-jenkins-pipline.git'
+
                 }
             }
         }
