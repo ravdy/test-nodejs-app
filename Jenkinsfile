@@ -12,6 +12,12 @@ pipeline {
            }
         }
      }
+     // stage('Git Clone') {
+     //        steps {
+     //            // Git clone step
+     //            git branch: '*/stage', credentialsId: 'git-hub', url: 'your-repo-url'
+     //        }
+     //    }
      
      stage('Test') { 
         steps { 
