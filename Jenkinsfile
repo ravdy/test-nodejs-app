@@ -7,8 +7,9 @@ pipeline {
      stage('Install Dependencies') { 
         steps { 
            sh 'echo "install Dependencies"'
-           sh 'echo ${BRANCH_NAME}'
-           sh 'echo ${env.BRANCH_NAME}'
+           script{
+             echo "Current branch: ${env.BRANCH_NAME}"
+           }
         }
      }
      
