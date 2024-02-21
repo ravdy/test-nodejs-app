@@ -8,7 +8,7 @@ pipeline {
         steps { 
            sh 'echo "install Dependencies"'
            script{
-             echo "Current branch: ${env.BRANCH_NAME}"
+             echo "Current branch: ${env.JOB_BASE_NAME}_${env.BRANCH_NAME}"
              echo "Git repo: ${env.GIT_URL}"
            }
         }
