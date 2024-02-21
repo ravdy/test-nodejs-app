@@ -16,7 +16,7 @@ pipeline {
      stage('Git Clone') {
             steps {
                 // Git clone step
-                git branch: ${env.BRANCH_NAME}, credentialsId: 'git-hub', url: ${env.GIT_URL}
+                git branch: "${env.BRANCH_NAME}", credentialsId: 'git-hub', URL: "${env.GIT_URL}"
             }
         }
      
