@@ -8,7 +8,7 @@ pipeline {
         steps { 
            sh 'echo "install Dependencies"'
            script{
-             echo "Current branch: ${env.JOB_NAME}_${env.BRANCH_NAME}"
+             echo "Current branch: Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
            }
         }
