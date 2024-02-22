@@ -36,6 +36,14 @@ pipeline {
            sh 'echo "testing application..."'
         }
       }
+     stage('Docker Build') {
+            steps {
+                // Docker build step
+                script {
+                    docker.build("your-image-name:${env.BRANCH_NAME}")
+                }
+            }
+        }
 
          stage("Deploy application") { 
          steps {
