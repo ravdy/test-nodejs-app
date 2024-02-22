@@ -1,12 +1,22 @@
 pipeline { 
   
    agent any
+  environment{
+    script {
+        if (env.BRANCH_NAME == 'dev') {
+        // Deploy to dev server
+          sh 'echo "dev deploymebnt"'
+          DEV_ENV = 'devserver_ip'
+           
+        }
+    }
+  }
 
    stages {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'echo "Install Dependencies ${GIT_URL}"'
+           sh 'echo "Install Dependencies ${DEV_ENV} ${GIT_URL}"'
            script{
              echo "Current branch: Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
