@@ -6,7 +6,7 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'echo "install Dependencies"'
+           sh 'echo "install Dependencies ${env.GIT_URL} "'
            script{
              echo "Current branch: Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
