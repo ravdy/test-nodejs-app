@@ -38,9 +38,21 @@ pipeline {
       }
 
          stage("Deploy application") { 
-         steps { 
-           sh 'echo "deploying application..."'
-         }
+         steps {
+                // Deploy step
+                script {
+                    if (env.BRANCH_NAME == 'dev') {
+                        // Deploy to dev server
+                        sh 'echo "dev deploymebnt"'
+                    } else if (env.BRANCH_NAME == 'qa') {
+                        // Deploy to qa server
+                        sh 'echo "qa deploymebnt"'
+                    } else if (env.BRANCH_NAME == 'stage') {
+                        // Deploy to stage server
+                        sh 'echo "stage deploymebnt"'
+                    }
+                }
+            }
 
      }
   
