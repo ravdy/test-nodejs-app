@@ -6,9 +6,9 @@ pipeline {
     DEV_ENV = 'devserver_ip'
     // VAR = null
   }
-  options {
-        skipDefaultCheckout(true)
-    }
+  // options {
+  //       skipDefaultCheckout(true)
+  //   }
 
    stages {
       stage('Set Environment') {
