@@ -14,8 +14,9 @@ pipeline {
             steps {
                 script {
                     def branchName = env.BRANCH_NAME
-
+                    sh "echo '${env.BRANCH_NAME}'"
                     if (branchName == 'dev') {
+                      sh "echo 'DEV==>'"
                       VAR = 'development'  
                       //ENV = credentials('DEV_ENV')
                     } else if (branchName == 'qa') {
