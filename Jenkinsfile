@@ -1,9 +1,10 @@
+def VAR = null
 pipeline { 
   
    agent any
   environment{
     DEV_ENV = 'devserver_ip'
-    VAR = null
+    // VAR = null
   }
   options {
         skipDefaultCheckout(true)
@@ -17,12 +18,12 @@ pipeline {
                     sh "echo '${env.BRANCH_NAME}'"
                     if (branchName == 'dev') {
                       sh "echo 'DEV==>'"
-                      env.VAR = 'development' 
+                      VAR = 'development' 
                       echo "var======> ${VAR}"
                       //ENV = credentials('DEV_ENV')
                     } else if (branchName == 'qa') {
                       sh "echo 'QA==>'"
-                      env.VAR = 'quality analyst'  
+                      VAR = 'quality analyst'  
                       //ENV = credentials('QA_ENV')
                        echo "var======> ${VAR}"
                     } else {
@@ -36,7 +37,7 @@ pipeline {
         steps { 
            sh 'echo "Install Dependencies ${VAR}  ==>>  ${DEV_ENV} ${GIT_URL}"'
            script{
-             echo "Current branch: ${env.VAR} Dunkins_${env.BRANCH_NAME}_env"
+             echo "Current branch: ${VAR} Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
            }
         }
