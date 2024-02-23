@@ -3,13 +3,14 @@ pipeline {
    agent any
   environment{
     DEV_ENV = 'devserver_ip'
+    VAR = null
   }
 
    stages {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'echo "Install Dependencies ${DEV_ENV} ${GIT_URL}"'
+           sh 'echo "Install Dependencies ${VAR} ==>>  ${DEV_ENV} ${GIT_URL}"'
            script{
              echo "Current branch: Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
@@ -80,4 +81,31 @@ pipeline {
   
    	}
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
+    stages {
+        stage('Set Environment') {
+            steps {
+                script {
+                    def branchName = env.BRANCH_NAME
+
+                    if (branchName == 'dev') {
+                      VAR = 'development'  
+                      //ENV = credentials('DEV_ENV')
+                    } else if (branchName == 'qa') {
+                      VAR = 'quality analyst'  
+                      //ENV = credentials('QA_ENV')
+                    } else {
+                        error "Branch not supported"
+                    }
+                }
+            }
+        }
+    }
+
+
+
+  
    }
