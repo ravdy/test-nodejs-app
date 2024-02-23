@@ -1,0 +1,67 @@
+pipeline {
+    agent any
+    environment {
+        ENV = credentials("300Moves_${env.BRANCH_NAME}_env")
+        Server_ip = credentials("300Moves_${env.BRANCH_NAME}_server_ip")
+    }
+    stages{
+        stage("cleanup"){
+             steps {
+                deleteDir()
+            }
+        }
+        stage ('Git clone'){
+            steps{
+                checkout scm
+            }
+
+        }
+        stage('SonarQube Analysis') {
+            when {
+                branch 'dev'
+            }
+ 			steps {
+ 				script {
+ 					scannerHome = tool 'Zapbuildsonarqube'
+ 				}
+ 				withSonarQubeEnv('sonar-global') {
+ 				  sh "${scannerHome}/bin/sonar-scanner \
+ 				  -D sonar.token=${SONAR_TOKEN} \
+ 				  -D sonar.projectKey=300moves-dev \
+ 				  -D sonar.sources=. \
+ 				  -D sonar.host.url=http://sonarqube.zapbuild.in:9000/"
+ 				}	
+ 			}
+ 			post {
+                always {
+                    script {
+                        def sonarqubeUrl = env.getProperty('sonarqube_url_id')
+                        
+                        emailext subject: '[${JOB_NAME}] - Sonarqube Scanning',
+                                  body: "Sonarqube scanning has been completed successfully. Click [here](${sonarqubeUrl}=300moves-dev) to check status",
+                                  to: 'lalitmohan@zapbuild.com',
+                                  replyTo: 'pc@zapbuild.com',
+                                  from: "sonarqube@zapbuild.com"
+                    }
+                }
+            }
+ 		}
+         
+
+
+        stage ("Build"){
+            steps {
+            sh 'cp $ENV .'
+            sh 'zip -r website.zip .'
+            }
+        }
+        stage ("Deploy on DevServer"){
+            steps{
+                sh 'echo "Deployment"'
+               // sh 'scp website.zip deploy.sh jenkins@$Server_ip:/var/www/jenkindeploy/300moves/$ENV'
+               // sh 'ssh jenkins@$Server_ip "cd /var/www/jenkindeploy/300moves/$ENV && chmod 755 deploy.sh && sh deploy.sh"'
+                }
+            }
+        }
+
+}
