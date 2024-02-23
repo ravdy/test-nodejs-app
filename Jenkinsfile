@@ -42,6 +42,17 @@ pipeline {
      //    }
      
      stage('Test') { 
+       when {
+                branch 'dev'
+            }
+        steps { 
+           sh 'echo "testing application..."'
+        }
+      }
+     stage('Test') { 
+       when {
+                branch 'qa'
+            }
         steps { 
            sh 'echo "testing application..."'
         }
