@@ -34,7 +34,7 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'echo "Install Dependencies ${VAR} ${env.VAR} ==>>  ${DEV_ENV} ${GIT_URL}"'
+           sh 'echo "Install Dependencies ${VAR}  ==>>  ${DEV_ENV} ${GIT_URL}"'
            script{
              echo "Current branch: Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
