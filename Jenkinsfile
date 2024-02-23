@@ -17,7 +17,8 @@ pipeline {
                     sh "echo '${env.BRANCH_NAME}'"
                     if (branchName == 'dev') {
                       sh "echo 'DEV==>'"
-                      VAR = 'development'  
+                      VAR = 'development' 
+                      echo "var======> ${VAR} ${env.VAR}"
                       //ENV = credentials('DEV_ENV')
                     } else if (branchName == 'qa') {
                       VAR = 'quality analyst'  
