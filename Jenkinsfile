@@ -5,8 +5,28 @@ pipeline {
     DEV_ENV = 'devserver_ip'
     VAR = null
   }
+  options {
+        skipDefaultCheckout(true)
+    }
 
    stages {
+      stage('Set Environment') {
+            steps {
+                script {
+                    def branchName = env.BRANCH_NAME
+
+                    if (branchName == 'dev') {
+                      VAR = 'development'  
+                      //ENV = credentials('DEV_ENV')
+                    } else if (branchName == 'qa') {
+                      VAR = 'quality analyst'  
+                      //ENV = credentials('QA_ENV')
+                    } else {
+                        error "Branch not supported"
+                    }
+                }
+            }
+        }
    
      stage('Install Dependencies') { 
         steps { 
@@ -81,29 +101,9 @@ pipeline {
   
    	}
 
-    options {
-        skipDefaultCheckout(true)
-    }
+    
 
-    stages {
-        stage('Set Environment') {
-            steps {
-                script {
-                    def branchName = env.BRANCH_NAME
-
-                    if (branchName == 'dev') {
-                      VAR = 'development'  
-                      //ENV = credentials('DEV_ENV')
-                    } else if (branchName == 'qa') {
-                      VAR = 'quality analyst'  
-                      //ENV = credentials('QA_ENV')
-                    } else {
-                        error "Branch not supported"
-                    }
-                }
-            }
-        }
-    }
+    
 
 
 
