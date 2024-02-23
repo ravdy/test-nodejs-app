@@ -2,14 +2,7 @@ pipeline {
   
    agent any
   environment{
-    script {
-        if (env.BRANCH_NAME == 'dev') {
-        // Deploy to dev server
-          sh 'echo "dev deploymebnt"'
-          DEV_ENV = 'devserver_ip'
-           
-        }
-    }
+    DEV_ENV = 'devserver_ip'
   }
 
    stages {
