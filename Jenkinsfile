@@ -18,11 +18,13 @@ pipeline {
                     if (branchName == 'dev') {
                       sh "echo 'DEV==>'"
                       VAR = 'development' 
-                      echo "var======> ${VAR} ${env.VAR}"
+                      echo "var======> ${VAR}"
                       //ENV = credentials('DEV_ENV')
                     } else if (branchName == 'qa') {
+                      sh "echo 'QA==>'"
                       VAR = 'quality analyst'  
                       //ENV = credentials('QA_ENV')
+                       echo "var======> ${VAR}"
                     } else {
                         error "Branch not supported"
                     }
@@ -32,7 +34,7 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'echo "Install Dependencies ${VAR} ==>>  ${DEV_ENV} ${GIT_URL}"'
+           sh 'echo "Install Dependencies ${VAR} ${env.VAR} ==>>  ${DEV_ENV} ${GIT_URL}"'
            script{
              echo "Current branch: Dunkins_${env.BRANCH_NAME}_env"
              echo "Git repo: ${env.GIT_URL}"
