@@ -34,7 +34,7 @@ pipeline {
      //        }
      //    }
      
-     stage('Test') { 
+     stage('Test DEV') { 
        when {
                 branch 'dev'
             }
@@ -42,7 +42,7 @@ pipeline {
            sh 'echo "testing application..."'
         }
       }
-     stage('Test') { 
+     stage('Test QA') { 
        when {
                 branch 'qa'
             }
