@@ -80,7 +80,7 @@ pipeline {
             steps {
                 // Docker build step
                 script {
-                    docker.build("your-image-name:${env.BRANCH_NAME}")
+                    app = docker.build("myapp:${env.BRANCH_NAME}")
                 }
             }
         }
