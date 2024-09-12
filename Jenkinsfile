@@ -6,7 +6,8 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'npm install' 
+           sh 'npm install'
+	   sh 'echo "bug fixed.. & Webhook initiated.. & dev1 has default branch"'
         }
      }
      
