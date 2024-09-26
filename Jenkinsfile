@@ -1,7 +1,8 @@
+test
 pipeline { 
   
    agent any
-
+ddsksnkmdjks
    stages {
    
      stage('Install Dependencies') { 
@@ -9,14 +10,12 @@ pipeline {
            sh 'npm install' 
         }
      }
-     
+     testtt
      stage('Test') { 
         steps { 
            sh 'echo "testing application..."'
         }
-      }
-
-         stage("Deploy application") { 
+      }         stage("Deploy application") { 
          steps { 
            sh 'echo "deploying application..."'
          }
