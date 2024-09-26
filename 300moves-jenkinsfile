@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+    environment {
+        ENV = credentials("300Moves_${env.BRANCH_NAME}_env")
+        Server_ip = credentials("300Moves_${env.BRANCH_NAME}_server_ip")
+        CREDENTIALS = credentials("gitlab-token")
+    }
+    stages{
+        stage("cleanup"){
+             steps {
+                deleteDir()
+            }
+        }
+        stage ('Git clone'){
+            steps{
+                checkout scm
+            }
+
+        }
+        stage('SonarQube Analysis') {
+            when {
+                branch 'dev'
+            }
+ 			steps {
+ 				script {
+ 					scannerHome = tool 'Zapbuildsonarqube'
+ 				}
+ 				withSonarQubeEnv('sonar-global') {
+ 				  sh "${scannerHome}/bin/sonar-scanner \
+ 				  -D sonar.token=${SONAR_TOKEN} \
+ 				  -D sonar.projectKey=300moves-dev \
+ 				  -D sonar.sources=. \
+ 				  -D sonar.host.url=http://sonarqube.zapbuild.in:9000/"
+ 				}	
+ 			}
+ 			post {
+                always {
+                    script {
+                        def sonarqubeUrl = env.getProperty('sonarqube_url_id')
+                        
+                        emailext subject: '[${JOB_NAME}] - Sonarqube Scanning',
+                                  body: "Sonarqube scanning has been completed successfully. Click [here](${sonarqubeUrl}=300moves-dev) to check status",
+                                  to: 'lalitmohan@zapbuild.com',
+                                  replyTo: 'pc@zapbuild.com',
+                                  from: "sonarqube@zapbuild.com"
+                    }
+                }
+            }
+ 		}
+         
+
+
+        stage ("Build"){
+            when {
+                not {
+                    branch 'master'
+                }
+            }
+            steps {
+            sh 'echo "300Moves_${BRANCH_NAME}_env"'
+            sh 'cp $ENV .'
+            sh 'zip -r website.zip .'
+            }
+        }
+        stage ("Deploy on DevServer"){
+            steps{
+                script{
+                    if (env.BRANCH_NAME == 'dev'){
+                        sh 'echo "dev server"'
+                        sh 'scp website.zip deploy.sh jenkins@$Server_ip:/var/www/html/jenkindeploy/300moves/${BRANCH_NAME}'
+                        sh 'ssh jenkins@$Server_ip "cd /var/www/html/jenkindeploy/300moves/${BRANCH_NAME} && chmod 755 deploy.sh && sh deploy.sh"'
+                    } else if (env.BRANCH_NAME == 'qa') {
+                        // Deploy to qa server
+                        sh 'echo "qa deployment"'
+                        sh 'scp website.zip deploy.sh jenkins@$Server_ip:/var/www/html/jenkindeploy/300moves/${BRANCH_NAME}'
+                        sh 'ssh jenkins@$Server_ip "cd /var/www/html/jenkindeploy/300moves/${BRANCH_NAME} && chmod 755 deploy.sh && sh deploy.sh"'
+                    } else if (env.BRANCH_NAME == 'master') {
+                        // Deploy to stage server
+                        sh 'echo "Live deploymebnt"'
+                        sh 'ssh ubuntu@$Server_ip "cd /var/www/html/300moves/public_html/ && git pull https://${CREDENTIALS_USR}:${CREDENTIALS_PSW}@gitlab.zapbuild.com/zapbuild/cwvr.git master"'
+                        sh 'scp ${ENV} ubuntu@$Server_ip:/var/www/html/300moves/public_html/'
+                        sh 'ssh ubuntu@$Server_ip "cd /var/www/html/300moves/public_html/ && docker-compose up --build -d"'
+                    }
+                }
+                //sh 'echo "Deployment"'
+                //sh 'scp website.zip deploy.sh jenkins@$Server_ip:/var/www/html/jenkindeploy/300moves/${BRANCH_NAME}'
+                //sh 'ssh jenkins@$Server_ip "cd /var/www/html/jenkindeploy/300moves/${BRANCH_NAME} && chmod 755 deploy.sh && sh deploy.sh"'
+                }
+            }
+        }
+
+}
