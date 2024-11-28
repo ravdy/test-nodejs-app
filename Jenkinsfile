@@ -1,16 +1,18 @@
-pipeline { 
-  
+pipeline {  
    agent any
+   tools{
+    nodejs 'nodejs'
+   }
 
-   stages {
+   stages{
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'npm install' 
+           echo 'git fetch'
         }
      }
      
-     stage('Test') { 
+     stage('Test') {
         steps { 
            sh 'echo "testing application..."'
         }
