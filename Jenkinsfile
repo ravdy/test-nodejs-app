@@ -6,19 +6,19 @@ pipeline {
    
      stage('Install Dependencies') { 
         steps { 
-           sh 'npm install' 
+           echo ''check dependencies...." 
         }
      }
      
      stage('Test') { 
         steps { 
-           sh 'echo "testing application..."'
+           echo "testing application..."
         }
       }
 
-         stage("Deploy application") { 
+         stage("validate application") { 
          steps { 
-           sh 'echo "deploying application..."'
+            echo "deploying application..."
          }
 
      }
