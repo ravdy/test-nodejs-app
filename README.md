@@ -14,7 +14,7 @@
    ```sh 
    yum groupinstall 'Development Tools'
    ```
-
+----
 1. Install nodejs
    ```sh 
    yum -y install nodejs
