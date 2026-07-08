@@ -1,28 +1,30 @@
-pipeline { 
-  
-   agent any
-
-   stages {
-   
-     stage('Install Dependencies') { 
-        steps { 
-           sh 'npm install' 
+pipeline {
+    agent any
+    stages{
+        stage("new"){
+            steps{
+                echo "new sources"
+            }
         }
-     }
-     
-     stage('Test') { 
-        steps { 
-           sh 'echo "testing application..."'
+           stage("advanced"){
+            steps{
+                echo "advanced resource"
+            }
         }
-      }
-
-         stage("Deploy application") { 
-         steps { 
-           sh 'echo "deploying application..."'
-         }
-
-     }
-  
-   	}
-
-   }
+           stage("advanced level testing"){
+            steps{
+                echo "advanced level resources"
+            }
+        }
+           stage("BUILDING"){
+            steps{
+                echo "Building the sources"
+            }
+        }
+           stage("analyze"){
+            steps{
+                echo "analyzing the sources"
+            }
+        }
+    }
+}
