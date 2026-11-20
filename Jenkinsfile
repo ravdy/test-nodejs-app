@@ -24,6 +24,13 @@ pipeline {
          }
 
      }
+
+         stage("apply successful") { 
+         steps { 
+           sh 'echo "Successfully deployed new version..."'
+         }
+
+     }
   
    	}
 
