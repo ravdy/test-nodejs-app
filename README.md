@@ -1,7 +1,7 @@
 # Build and Deploy nodejs application on EC2 instance - Freestyle 
 # Adding comment to test the trigger
 # updates added by Chinmaya
-# Updates from Devops Sushree for second time
+# Updates from Devops Sushree for second time to perform node operation
 # Pre-requisites
 
 1. A Jenkins server 
