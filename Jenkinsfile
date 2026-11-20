@@ -1,6 +1,6 @@
 pipeline { 
   
-   agent java-node
+   agent {"java-node"}
 
    stages {
    
