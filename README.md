@@ -1,5 +1,5 @@
 # Build and Deploy nodejs application on EC2 instance - Freestyle 
-
+# Adding comment to test the trigger
 # Pre-requisites
 
 1. A Jenkins server 
